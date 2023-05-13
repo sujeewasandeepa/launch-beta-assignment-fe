@@ -5,8 +5,11 @@ export default function Table() {
   const [employees, setEmployees] = useState(null);
   const [editForm, setEditForm] = useState(false);
 
-  const handleShowEditForm = () => {
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  const handleShowEditForm = (employee) => {
     setEditForm(true);
+    setSelectedEmployee(employee);
   }
 
   const handleHideEditForm = () => {
@@ -46,7 +49,7 @@ export default function Table() {
   return (
     <>
     {
-      editForm && <EditEmployeeForms handleHideEditForm={handleHideEditForm} />
+      editForm && <EditEmployeeForms handleHideEditForm={handleHideEditForm} selectedEmployee={selectedEmployee} refresh={fetchEmployees}/>
     }
       <table className="m-5">
         <thead>
@@ -66,7 +69,7 @@ export default function Table() {
               <td className="px-4">{employee.designation}</td>
               <td className="px-4">{employee.employeeType}</td>
               <td className="px-4">{employee.experience}</td>
-              <td onClick={handleShowEditForm}><a href="#" className="has-text-info mr-3">Edit</a></td>
+              <td onClick={() => {handleShowEditForm(employee)}}><a href="#" className="has-text-info mr-3">Edit</a></td>
               <td onClick={() => {handleDelete(employee)}}><a href="#" className="has-text-danger">Delete</a></td>
             </tr>
           ))}
