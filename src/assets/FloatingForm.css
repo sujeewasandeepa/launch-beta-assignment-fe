@@ -1,0 +1,6 @@
+.box {
+    display: float;
+    margin: 0 auto;
+    background-color: rgba(238, 238, 238, 0.808);
+    width: 65%;
+}

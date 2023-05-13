@@ -17,9 +17,9 @@ function App() {
     <>
       <h1 className='has-text-dark m-5 title'>People</h1>
       <hr />
-      <div>
+      <div className='mb-5'>
         <input type="dropdown" placeholder="Employee Types" />
-        <button onClick={showEmployeeForm}>Add People</button>
+        <button className="button is-info ml-2" onClick={showEmployeeForm}>Add People</button>
       </div>
       {
         addEmployeeForm &&
