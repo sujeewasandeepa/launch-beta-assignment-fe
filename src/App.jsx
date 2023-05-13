@@ -1,27 +1,17 @@
-import { useState, useEffect } from 'react';
-
 import Table from './components/Table';
 import AddEmployeeForm from './components/AddEmployeeForm';
-
+import { useState } from 'react';
 
 function App() {
 
-  const [employees, setEmployees] = useState(0);
+  const [addEmployeeForm, setAddEmployeeForm] = useState(false);
 
-  const fetchEmployees = async () => {
-    await fetch("http://localhost:5000/employee")
-      .then(res => res.json())
-      .then(data => setEmployees(data))
-      .catch(err => console.error(err));
-  };
-
-  useEffect(() => {
-    try {
-      fetchEmployees();
-    } catch (err) {
-      console.error(err);
-    }
-  }, [])
+  const showEmployeeForm = () => {
+    setAddEmployeeForm(true);
+  }
+  const hideEmployeeForm = () => {
+    setAddEmployeeForm(false);
+  }
 
   return (
     <>
@@ -29,15 +19,14 @@ function App() {
       <hr />
       <div>
         <input type="dropdown" placeholder="Employee Types" />
-        <button>Add People</button>
+        <button onClick={showEmployeeForm}>Add People</button>
       </div>
-
+      {
+        addEmployeeForm &&
+        <AddEmployeeForm handleHideAddForm={hideEmployeeForm} />
+      }
       <Table />
-      <AddEmployeeForm />
-      
-      <h2>
-        {employees[0]}
-      </h2>
+
     </>
   )
 }

@@ -1,12 +1,6 @@
-import { useState } from "react";
+function AddEmployeeForm(props) {
 
-function AddEmployeeForm() {
-
-  const [hidden, setHidden] = useState(true);
-
-  const toggleHidden = () => {
-    setHidden(!hidden);
-  }
+  const handleClose = props.handleHideAddForm;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +48,7 @@ function AddEmployeeForm() {
           <h1>Add People</h1>
         </div>
         <div className="column">
-          <button>X</button>
+          <button onClick={handleClose}>X</button>
         </div>
       </div>
       <hr/>
@@ -142,7 +136,7 @@ function AddEmployeeForm() {
 
         <hr/>
         <div>
-          <button className="button m-2">Cancel</button>
+          <button className="button m-2" onClick={handleClose}>Cancel</button>
           <button type="submit" className="button is-info m-2">Add People</button>
         </div>
 
