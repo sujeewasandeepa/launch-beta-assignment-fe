@@ -2,11 +2,11 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
-function DropDown({ items, functions }) {
+function DropDown({ items, dummyPlaceHolder, functions }) {
     // items should be an array
     
     const [active, setActive] = useState("");
-    const [placeholder, setPlaceholder] = useState("Gender");
+    const [placeholder, setPlaceholder] = useState(dummyPlaceHolder);
 
     const handleClick = (e) => {
         e.preventDefault();

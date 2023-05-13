@@ -6,6 +6,18 @@ import { useState } from "react";
 function AddEmployeeForm(props) {
 
   const [gender, setGender] = useState("");
+  const [empType, setEmpType] = useState("");
+  const [experience, setExperience] = useState("");
+
+  const getExperience = (value) => {
+    setExperience(value);
+    console.log(value);
+  }
+
+  const getEmpType = (value) => {
+    setEmpType(value);
+    console.log(value);
+  }
 
   const getGender = (value) => {
     setGender(value);
@@ -21,12 +33,12 @@ function AddEmployeeForm(props) {
       fullname: data.get("fullname"),
       nameInitails: data.get("nameInitials"),
       displayName: data.get("displayName"),
-      gender: data.get("gender"),
+      gender: gender,
       birthday: data.get("birthday"),
       email: data.get("email"),
       mobile: data.get("mobile"),
       designation: data.get("designation"),
-      employeeType: data.get("empType"),
+      employeeType: empType,
       joinedDate: data.get("joinedDate"),
       experience: data.get("experience"),
       salary: data.get("salary"),
@@ -48,6 +60,7 @@ function AddEmployeeForm(props) {
 
     if (res.ok) {
       console.log(res);
+      handleClose();
     }
 
   }
@@ -70,7 +83,7 @@ function AddEmployeeForm(props) {
           <div className="column">
 
             <div className="field">
-              <label htmlFor="fullname" className="label">Full Name</label><br />
+              <label htmlFor="fullname" className="label">Full Name*</label><br />
               <div className="control">
                 <input type="text" id="fullname" name="fullname" placeholder="Full Name" className="input" />
               </div>
@@ -83,7 +96,7 @@ function AddEmployeeForm(props) {
 
           <div className="column">
             <div className="field">
-              <label htmlFor="nameInitials" className="label">Name with initials</label>
+              <label htmlFor="nameInitials" className="label">Name with initials*</label>
               <div className="control">
                 <input className="input" type="text" id="nameInitials" name="nameInitials" placeholder="Name with initials" />
               </div>
@@ -108,7 +121,7 @@ function AddEmployeeForm(props) {
               <label className="label" htmlFor="gender">Gender</label><br />
               <div className="control">
                 {/* drop down should be here */}
-                <DropDown items={["Male", "Female", "Other"]} functions={getGender}/>
+                <DropDown items={["Male", "Female", "Other"]} functions={getGender} dummyPlaceHolder={"Gender"} />
               </div>
             </div>
 
@@ -159,8 +172,7 @@ function AddEmployeeForm(props) {
             <div className="field">
               <label className="label" htmlFor="empType">Employee Type</label>
               <div className="control">
-                {/* dropdown */}
-                <input className="input" type="text" id="empType" name="empType" placeholder="Full time" />
+                <DropDown items={["Full time", "Part time", "Contract Basis", "Other"]} functions={getEmpType} dummyPlaceHolder={"Employee Type"} />
               </div>
             </div>
           </div>
@@ -182,7 +194,7 @@ function AddEmployeeForm(props) {
             <div className="field">
               <label className="label" htmlFor="experience">Experience</label><br />
               <div className="control">
-                <input className="input" type="text" id="experience" name="experience" placeholder="03 Years" />
+              <DropDown items={["> 01 Year", "01 Year", "02 Years", "03 Years", "04 Years", "05 Years", "05 + years"]} functions={getExperience} dummyPlaceHolder={"Experience"} />
               </div>
             </div>
           </div>
