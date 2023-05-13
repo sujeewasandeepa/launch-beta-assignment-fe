@@ -40,14 +40,9 @@ function AddEmployeeForm(props) {
       designation: data.get("designation"),
       employeeType: empType,
       joinedDate: data.get("joinedDate"),
-      experience: data.get("experience"),
+      experience: experience,
       salary: data.get("salary"),
       notes: data.get("notes"),
-    };
-
-    const test = {
-      fullname: "ssk",
-      "nameInitials": "ssk",
     };
 
     const res = await fetch("http://localhost:5000/employee/add", {
