@@ -2,19 +2,19 @@ export default function Table() {
 
   return (
     <>
-      <table>
+      <table className="m-5">
         <thead>
-          <tr>
-            <th>Display Name</th>
-            <th>Emp ID</th>
-            <th>Designation</th>
-            <th>Emp.type</th>
-            <th>Experience</th>
+          <tr className="">
+            <th className="px-4">Display Name</th>
+            <th className="px-4">Emp ID</th>
+            <th className="px-4">Designation</th>
+            <th className="px-4">Emp.type</th>
+            <th className="px-4">Experience</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            
+
           </tr>
         </tbody>
       </table>
