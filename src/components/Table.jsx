@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import EditEmployeeForms from "./EditEmployeeForm";
+import AddEmployeeForm from "./AddEmployeeForm";
 
-export default function Table() {
+export default function Table(props) {
   const [employees, setEmployees] = useState(null);
   const [editForm, setEditForm] = useState(false);
-
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  const { addEmployeeForm, handleHideAddForm } = props;
 
   const handleShowEditForm = (employee) => {
     setEditForm(true);
@@ -32,7 +34,7 @@ export default function Table() {
   }, [])
 
   const handleDelete = async (employee) => {
-    const id = {id: employee._id};
+    const id = { id: employee._id };
     const res = await fetch("http://localhost:5000/employee/delete", {
       method: "DELETE",
       body: JSON.stringify(id),
@@ -45,12 +47,16 @@ export default function Table() {
       console.log(`Successfully deleted ${employee.displayName} from the database`);
     }
   }
-  
+
   return (
     <>
-    {
-      editForm && <EditEmployeeForms handleHideEditForm={handleHideEditForm} selectedEmployee={selectedEmployee} refresh={fetchEmployees}/>
-    }
+      {
+        addEmployeeForm &&
+        <AddEmployeeForm handleHideAddForm={handleHideAddForm} refresh={fetchEmployees}/>
+      }
+      {
+        editForm && <EditEmployeeForms handleHideEditForm={handleHideEditForm} selectedEmployee={selectedEmployee} refresh={fetchEmployees} />
+      }
       <table className="m-5">
         <thead>
           <tr className="">
@@ -69,8 +75,8 @@ export default function Table() {
               <td className="px-4">{employee.designation}</td>
               <td className="px-4">{employee.employeeType}</td>
               <td className="px-4">{employee.experience}</td>
-              <td onClick={() => {handleShowEditForm(employee)}}><a href="#" className="has-text-info mr-3">Edit</a></td>
-              <td onClick={() => {handleDelete(employee)}}><a href="#" className="has-text-danger">Delete</a></td>
+              <td onClick={() => { handleShowEditForm(employee) }}><a href="#" className="has-text-info mr-3">Edit</a></td>
+              <td onClick={() => { handleDelete(employee) }}><a href="#" className="has-text-danger">Delete</a></td>
             </tr>
           ))}
         </tbody>

@@ -25,6 +25,7 @@ function AddEmployeeForm(props) {
   }
 
   const handleClose = props.handleHideAddForm;
+  const refresh = props.refresh;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,6 +55,7 @@ function AddEmployeeForm(props) {
     });
 
     if (res.ok) {
+      refresh();
       console.log(res);
       handleClose();
     }

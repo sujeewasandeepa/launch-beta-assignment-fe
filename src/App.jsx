@@ -1,5 +1,4 @@
 import Table from './components/Table';
-import AddEmployeeForm from './components/AddEmployeeForm';
 import DropDown from './components/DropDown';
 import { useState } from 'react';
 
@@ -28,11 +27,8 @@ function App() {
         <DropDown items={["Full time", "Part time", "Contract Basis", "Other"]} dummyPlaceHolder={"Employee Types"} functions={getEmpType} />
         <button className="button is-info ml-2" onClick={showEmployeeForm}>Add People</button>
       </div>
-      {
-        addEmployeeForm &&
-        <AddEmployeeForm handleHideAddForm={hideEmployeeForm} />
-      }
-      <Table />
+
+      <Table handleHideAddForm={hideEmployeeForm} addEmployeeForm={addEmployeeForm}/>
 
     </>
   )
