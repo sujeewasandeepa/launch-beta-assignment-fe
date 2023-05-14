@@ -9,6 +9,9 @@ export default function Table(props) {
 
   const { addEmployeeForm, handleHideAddForm } = props;
 
+  let empType = null;
+  empType = props.filterEmployee;
+
   const handleShowEditForm = (employee) => {
     setEditForm(true);
     setSelectedEmployee(employee);
@@ -20,10 +23,29 @@ export default function Table(props) {
 
   const fetchEmployees = async () => {
     await fetch("http://localhost:5000/employee")
-      .then(res => res.json())
-      .then(data => setEmployees(data))
-      .catch(err => console.error(err));
+    .then(res => res.json())
+    .then(data => setEmployees(data))
+    .catch(err => console.error(err));
   };
+  
+  const filterEmployees = async () => {
+    if (empType && empType != "Employee Types") {
+      let values = {employeeType: empType};
+  
+      await fetch("http://localhost:5000/employee/filter", {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then (res => res.json())
+      .then(data => setEmployees(data))
+      .catch(err => console.error(err));  
+    } else if (empType == "Employee Types") {
+      fetchEmployees();
+    }
+  }
+
 
   useEffect(() => {
     try {
@@ -32,6 +54,14 @@ export default function Table(props) {
       console.error(err);
     }
   }, [])
+
+  useEffect(() => {
+    try {
+      filterEmployees();
+    } catch (err) {
+      console.error(err);
+    }
+  }, [empType])
 
   const handleDelete = async (employee) => {
     const id = { id: employee._id };
@@ -70,13 +100,13 @@ export default function Table(props) {
         <tbody>
           {employees && employees.map((employee, index) => (
             <tr key={index}>
-              <td className="px-4">{employee.displayName}</td>
-              <td className="px-4">{employee.id}.toString().padStart(4, 0)</td>
-              <td className="px-4">{employee.designation}</td>
-              <td className="px-4">{employee.employeeType}</td>
-              <td className="px-4">{employee.experience}</td>
-              <td onClick={() => { handleShowEditForm(employee) }}><a href="#" className="has-text-info mr-3">Edit</a></td>
-              <td onClick={() => { handleDelete(employee) }}><a href="#" className="has-text-danger">Delete</a></td>
+              <td className="px-4 py-2">{employee.displayName}</td>
+              <td className="px-4 py-2">{employee.id.toString().padStart(4, 0)}</td>
+              <td className="px-4 py-2">{employee.designation}</td>
+              <td className="px-4 py-2">{employee.employeeType}</td>
+              <td className="px-4 py-2">{employee.experience}</td>
+              <td className="py-2" onClick={() => { handleShowEditForm(employee) }}><a href="#" className="has-text-info mr-3">Edit</a></td>
+              <td className="py-2" onClick={() => { handleDelete(employee) }}><a href="#" className="has-text-danger">Delete</a></td>
             </tr>
           ))}
         </tbody>
