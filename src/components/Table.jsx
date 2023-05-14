@@ -71,7 +71,7 @@ export default function Table(props) {
           {employees && employees.map((employee, index) => (
             <tr key={index}>
               <td className="px-4">{employee.displayName}</td>
-              <td className="px-4">{employee._id}</td>
+              <td className="px-4">{employee.id}.toString().padStart(4, 0)</td>
               <td className="px-4">{employee.designation}</td>
               <td className="px-4">{employee.employeeType}</td>
               <td className="px-4">{employee.experience}</td>
