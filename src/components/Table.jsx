@@ -6,6 +6,7 @@ export default function Table(props) {
   const [employees, setEmployees] = useState(null);
   const [editForm, setEditForm] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [sorted, setSorted] = useState(0);
 
   const { addEmployeeForm, handleHideAddForm } = props;
 
@@ -27,7 +28,7 @@ export default function Table(props) {
     .then(data => setEmployees(data))
     .catch(err => console.error(err));
   };
-  
+
   const filterEmployees = async () => {
     if (empType && empType != "Employee Types") {
       let values = {employeeType: empType};
@@ -78,6 +79,37 @@ export default function Table(props) {
     }
   }
 
+  // handle sorting
+  /*  
+  I take a variable called sorted and make it 1 if it's sorted by display name.
+  If it's already sorted by display name, I reverse it if it is clicked agian. 
+
+  I do the same for ID as well. But for ID I use 2. 
+  */
+  const sortByDisplayName = () => {
+    if (sorted != 1) {
+      let sortedEmps = [...employees].sort((a, b) => a.displayName.localeCompare(b.displayName));
+      setEmployees(sortedEmps);
+      setSorted(1);
+    } else if(sorted == 1) {
+      let sortedEmps = [...employees].reverse();
+      setEmployees(sortedEmps);
+      setSorted(0);
+    }
+  }
+
+  const sortByID = () => {
+    if (sorted != 2) {
+      let sortedEmps = [...employees].sort((a, b) => a.id.toString().localeCompare(b.id));
+      setEmployees(sortedEmps);
+      setSorted(2);
+    } else if(sorted == 2){
+      let sortedEmps = [...employees].reverse();
+      setEmployees(sortedEmps);
+      setSorted(0);
+    }
+  }
+
   return (
     <>
       {
@@ -90,8 +122,8 @@ export default function Table(props) {
       <table className="m-5">
         <thead>
           <tr className="">
-            <th className="px-4">Display Name</th>
-            <th className="px-4">Emp ID</th>
+            <th className="px-4" onClick={sortByDisplayName}>Display Name</th>
+            <th className="px-4" onClick={sortByID}>Emp ID</th>
             <th className="px-4">Designation</th>
             <th className="px-4">Emp.type</th>
             <th className="px-4">Experience</th>
