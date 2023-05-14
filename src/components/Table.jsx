@@ -125,21 +125,21 @@ export default function Table(props) {
       <table className="m-5">
         <thead>
           <tr className="">
-            <th className="px-4" onClick={sortByDisplayName} id="displayName">
+            <th className="px-4 py-3" onClick={sortByDisplayName} id="displayName">
               Display Name
               <span className="ml-2 sortIcon">
                 <FontAwesomeIcon icon={ faSort }/>
               </span>
             </th>
-            <th className="px-4" onClick={sortByID} id="empID">
+            <th className="px-4 py-3" onClick={sortByID} id="empID">
               Emp ID
               <span className="ml-2 sortIcon">
                 <FontAwesomeIcon icon={ faSort }/>
               </span>
             </th>
-            <th className="px-4">Designation</th>
-            <th className="px-4">Emp.type</th>
-            <th className="px-4">Experience</th>
+            <th className="px-4 py-3">Designation</th>
+            <th className="px-4 py-3">Emp.type</th>
+            <th className="px-4 py-3">Experience</th>
           </tr>
         </thead>
         <tbody>

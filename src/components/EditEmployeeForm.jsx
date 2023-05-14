@@ -1,5 +1,7 @@
 import "../assets/FloatingForm.css";
 import DropDown from "./DropDown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 import { useState } from "react";
 
@@ -13,17 +15,14 @@ function EditEmployeeForm(props) {
 
   const getExperience = (value) => {
     setExperience(value);
-    console.log(value);
   }
 
   const getEmpType = (value) => {
     setEmpType(value);
-    console.log(value);
   }
 
   const getGender = (value) => {
     setGender(value);
-    console.log(value);
   }
 
   const handleClose = props.handleHideEditForm;
@@ -77,7 +76,9 @@ function EditEmployeeForm(props) {
           <h1 className="title is-size-4">Edit People</h1>
         </div>
         <div className="column">
-          <button onClick={handleClose}>X</button>
+          <span onClick={handleClose} id="closeIcon">
+              <FontAwesomeIcon icon={faX} />
+            </span>
         </div>
       </div>
       <hr />
@@ -237,7 +238,7 @@ function EditEmployeeForm(props) {
             <div className="field">
               <label className="label" htmlFor="experience">Experience</label><br />
               <div className="control">
-              <DropDown items={["> 01 Year", "01 Year", "02 Years", "03 Years", "04 Years", "05 Years", "05 + years"]} functions={getExperience} dummyPlaceHolder={experience} />
+              <DropDown items={["< 01 Year", "01 Year", "02 Years", "03 Years", "04 Years", "05 Years", "05 + years"]} functions={getExperience} dummyPlaceHolder={experience} />
               </div>
             </div>
           </div>

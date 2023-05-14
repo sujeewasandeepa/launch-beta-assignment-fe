@@ -1,6 +1,7 @@
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import "../assets/DropDown.css"
 
 function DropDown({ items, dummyPlaceHolder, functions }) {
     // items should be an array
@@ -27,7 +28,7 @@ function DropDown({ items, dummyPlaceHolder, functions }) {
         <>
             <div className={`dropdown ${active}`}>
                 <div className="dropdown-trigger">
-                    <button onClick={handleClick} className="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                    <button onClick={handleClick} id="dropdown-wrap" className="button" aria-haspopup="true" aria-controls="dropdown-menu">
                         <span>{placeholder}</span>
                         <span className="icon is-small">
                             <FontAwesomeIcon icon={faAngleDown} />

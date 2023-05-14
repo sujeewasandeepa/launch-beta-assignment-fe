@@ -4,3 +4,12 @@
     background-color: rgba(238, 238, 238, 0.808);
     width: 65%;
 }
+
+#closeIcon {
+    float: right;
+    margin-right: 10px;
+}
+
+#closeIcon:hover {
+    color: rgb(201, 10, 10);
+}
