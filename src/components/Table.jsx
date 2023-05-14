@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import EditEmployeeForms from "./EditEmployeeForm";
 import AddEmployeeForm from "./AddEmployeeForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSort } from "@fortawesome/free-solid-svg-icons";
+import "../assets/Table.css"
 
 export default function Table(props) {
   const [employees, setEmployees] = useState(null);
@@ -122,8 +125,18 @@ export default function Table(props) {
       <table className="m-5">
         <thead>
           <tr className="">
-            <th className="px-4" onClick={sortByDisplayName}>Display Name</th>
-            <th className="px-4" onClick={sortByID}>Emp ID</th>
+            <th className="px-4" onClick={sortByDisplayName} id="displayName">
+              Display Name
+              <span className="ml-2 sortIcon">
+                <FontAwesomeIcon icon={ faSort }/>
+              </span>
+            </th>
+            <th className="px-4" onClick={sortByID} id="empID">
+              Emp ID
+              <span className="ml-2 sortIcon">
+                <FontAwesomeIcon icon={ faSort }/>
+              </span>
+            </th>
             <th className="px-4">Designation</th>
             <th className="px-4">Emp.type</th>
             <th className="px-4">Experience</th>
@@ -132,12 +145,12 @@ export default function Table(props) {
         <tbody>
           {employees && employees.map((employee, index) => (
             <tr key={index}>
-              <td className="px-4 py-2">{employee.displayName}</td>
-              <td className="px-4 py-2">{employee.id.toString().padStart(4, 0)}</td>
-              <td className="px-4 py-2">{employee.designation}</td>
-              <td className="px-4 py-2">{employee.employeeType}</td>
-              <td className="px-4 py-2">{employee.experience}</td>
-              <td className="py-2" onClick={() => { handleShowEditForm(employee) }}><a href="#" className="has-text-info mr-3">Edit</a></td>
+              <td className="px-5 py-2">{employee.displayName}</td>
+              <td className="px-5 py-2">{employee.id.toString().padStart(4, 0)}</td>
+              <td className="px-5 py-2">{employee.designation}</td>
+              <td className="px-5 py-2">{employee.employeeType}</td>
+              <td className="px-5 py-2">{employee.experience}</td>
+              <td className="px-5 py-2" onClick={() => { handleShowEditForm(employee) }}><a href="#" className="has-text-info mr-3">Edit</a></td>
               <td className="py-2" onClick={() => { handleDelete(employee) }}><a href="#" className="has-text-danger">Delete</a></td>
             </tr>
           ))}

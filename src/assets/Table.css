@@ -1,0 +1,11 @@
+#displayName:hover {
+    text-decoration: underline;
+}
+
+#empID:hover {
+    text-decoration: underline;
+}
+
+.sortIcon:hover {
+    color: rgb(90, 97, 189);
+}
